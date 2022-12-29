@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>房屋租赁系统</title>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/main.css" th:href="@{/css/main.css}"/>
+    <script type="text/javascript" src="../../../static/js/jquery-2.1.1.min.js" th:src="@{/js/jquery-2.1.1.min.js}"></script>
+    <script type="text/javascript" src="../../../static/js/libs/modernizr.min.js" th:src="@{/js/libs/modernizr.min.js}"></script>
+
+    <script type="text/javascript">
+        var error = "${param.error}";
+        if (error == "insertToPaid") {
+            alert("租金信息添加成功！");
+        }
+    </script>
+</head>
+<body>
+<div>
+    <div class="result-title">
+        <h1>待处理报障</h1>
+    </div>
+    <form id="houseForm" name="houseForm"
+          action="/wrong/myWrongList"
+          method="post">
+
+        <div class="result-content">
+            <table id=grid
+                   class="result-tab" width="100%">
+                <tbody>
+                <tr style="font-weight: bold; font-style: normal; background-color: #eeeeee; text-decoration: none">
+                    <td>房屋代号</td>
+                    <td>地址</td>
+                    <td>报障日期</td>
+                    <td>租赁人</td>
+                    <td>报障内容</td>
+                    <td>状态</td>
+                </tr>
+
+                <tr style="font-weight: normal; font-style: normal; background-color: white; text-decoration: none" th:each="w:${wrong}">
+                    <td th:text="${w.houseCode}"></td>
+                    <td th:text="${w.address}"></td>
+                    <td th:text="${w.date}"></td>
+                    <td th:text="${w.name}"></td>
+                    <td th:text="${w.detail}"></td>
+                    <td th:text="${w.status}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <tr>
+           <div th:replace="paging :: html"></div>
+        </tr>
+
+    </form>
+</div>
+<script language=javascript>
+    // 提交分页的查询的表单
+    function to_page(page) {
+        if (page) {
+            $("#page").val(page);
+        }
+        document.houseForm.submit();
+    }
+</script>
+</body>
+</html>

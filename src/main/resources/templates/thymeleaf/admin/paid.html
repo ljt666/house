@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>房屋租赁系统</title>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/jquery-ui.css" th:href="@{/css/jquery-ui.css}"/>
+    <script type="text/javascript" src="../../../static/js/libs/modernizr.min.js" th:src="@{/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="../../../static/js/jquery-1.8.3.min.js" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" src="../../../static/js/jquery-ui-datepicker.js" th:src="@{/js/jquery-ui-datepicker.js}"></script>
+    <script type="text/javascript" src="../../../static/js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
+
+    <script type="text/javascript">
+        $().ready(function () {
+            // 在键盘按下并释放及提交后验证提交表单
+            $("#dateFrom").datepicker();
+            $("#dateTo").datepicker();
+        });
+
+    </script>
+
+</head>
+<body>
+<div>
+    <div class="result-title">
+        <h1>租客已缴租金列表</h1>
+    </div>
+    <div class="search-wrap">
+        <div class="search-content">
+            <form action="/paid/selectAll" method="post" name="myform">
+                <table class="search-tab">
+                    <tr>
+                        <th width="120">租客姓名：</th>
+                        <td><input class="common-text" placeholder="姓名" name="zuname" th:value="${vo.zuname}" id="zuname"
+                                   type="text"></td>
+                        <th width="70">起始日期:</th>
+                        <td><input class="common-text" name="dateFrom" placeholder="请选择应缴日期" th:value="${vo.dateFrom}"
+                                   id="dateFrom" type="text" readonly></td>
+                        <th width="70">终止日期:</th>
+                        <td><input class="common-text" placeholder="请选择应缴日期" name="dateTo" th:value="${vo.dateTo}"
+                                   id="dateTo" type="text" readonly></td>
+                        <input type="hidden" id="page" name="page" value="">
+
+                        <td>
+                            <input class="btn btn-primary btn2" name="sub" value="查询" type="submit">
+                            <button class="btn btn-primary" id="qingkong" type="button">清空</button>
+                        </td>
+
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="result-content">
+        <table id=grid
+               class="result-tab" width="100%">
+            <tbody>
+            <tr style="font-weight: bold; font-style: normal; background-color: #eeeeee; text-decoration: none">
+                <td>房屋代号</td>
+                <td>地址</td>
+                <td>租金</td>
+                <td>租金应缴日期</td>
+                <td>租金实缴日期</td>
+                <td>租客姓名</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+            <tr style="font-weight: normal; font-style: normal; background-color: white; text-decoration: none" th:each="pa:${paid}">
+                <td th:text="${pa.houseCode}"></td>
+                <td th:text="${pa.address}"></td>
+                <td th:text="${pa.price}"></td>
+                <td th:text="${pa.date}"></td>
+                <td th:text="${pa.payDate}"></td>
+                <td th:text="${pa.name}"></td>
+                <td th:text="${pa.status}"></td>
+                <td>
+
+                    <a class="link-update"
+                       th:href="'/paid/deletePaid?id='+${pa.id}"
+                       onclick="return window.confirm('确定删除吗？')">删除</a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <tr>
+        <div style="line-height: 20px; height: 20px; text-align: right; margin-top:10px">
+            以上共收入租金：<B style="color:red" th:text="${sum}"></B>元
+        </div>
+        <div th:replace="paging :: html"></div>
+    </tr>
+</div>
+<script language=javascript>
+    // 提交分页的查询的表单
+    function to_page(page) {
+        if (page) {
+            $("#page").val(page);
+        }
+        document.myform.submit();
+    }
+
+    $("#qingkong").click(function () {
+        $(".common-text").val("");//将class为common-text的置空
+    })
+</script>
+</body>
+</html>

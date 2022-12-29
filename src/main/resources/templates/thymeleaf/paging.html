@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>分页抽取页面</title>
+</head>
+<body>
+<div>
+    <span id=pagelink>
+            <div style="line-height: 20px; height: 20px; text-align: right; margin-top:10px">
+                共[<B th:text="${p.total}"/>]条记录，共[<B th:text="${p.pages}"/>]页,
+                <th:block th:if="${ p.pageNum > 1 }">
+                   [<A th:onclick="|to_page(${p.prePage})|">前一页</A>]
+                </th:block>
+                <input type="hidden" name="page" id="page" value=""/>
+                第<B th:text="${p.pageNum}"/>页
+                <th:block th:if="${ p.pageNum < p.pages }">
+                   [<A th:onclick="|to_page(${p.nextPage})|">后一页</A>]
+                </th:block>
+            </div>
+    </span>
+</div>
+</body>
+</html>

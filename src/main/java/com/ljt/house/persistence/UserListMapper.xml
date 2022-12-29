@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljt.house.persistence.UserListMapper">
+
+    <select id="findAllUserList" resultType="com.ljt.house.dto.UserListDto">
+		SELECT
+		ul.name name,
+		ul.id_card idCard,
+		ul.phone phone,
+		u.id uid,
+		u.username username
+		FROM user u, userlist ul
+		where u.id = ul.user_id and u.type='zuke'
+	</select>
+
+    <select id="getUserZuList" resultType="com.ljt.house.dto.UserListDto">
+		select
+		u.name as name,
+		u.id_card as idCard,
+		u.phone as phone,
+		z.house_code as houseCode,
+		z.address as address,
+		z.price as price
+		from userlist u,zulist z where u.id = z.userlist_id and u.id=#{id}
+	</select>
+
+    <select id="getMyCheckout" resultType="com.ljt.house.dto.UserListDto">
+		select
+		u.name name,
+		u.id_card idCard,
+		u.phone phone,
+		c.id cid,
+		c.house_code houseCode,
+		c.address address,
+		c.status status
+		from userlist u,checkout c
+		where u.id = c.userlist_id and u.id=#{id}
+	</select>
+
+    <select id="getMyApply" resultType="com.ljt.house.dto.UserListDto">
+		select
+		u.name as name,
+		u.id_card as idCard,
+		u.phone as phone,
+		a.house_code as houseCode,
+		a.address as address,
+		a.price as price,
+		a.status as status
+		from userlist u,apply a
+		where u.id = a.userlist_id and u.id=#{id}
+	</select>
+
+    <select id="getMyApplyOut" resultType="com.ljt.house.dto.UserListDto">
+		select
+		u.name as name,
+		u.id_card as idCard,
+		u.phone as phone,
+		a.id as aid,
+		a.house_code as houseCode,
+		a.address as address,
+		a.status as status
+		from userlist u, applyout a where u.id = a.userlist_id and u.id=#{id}
+	</select>
+</mapper>

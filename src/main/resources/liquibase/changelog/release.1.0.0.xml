@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd" xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <property dbms="mysql,h2,postgresql,oracle" value="true" name="autoIncrement"/>
+    <property value="decimal(10,2)" name="amount"/>
+    <property value="date" name="date"/>
+
+    <changeSet id="201912301206001" author="jintao.li">
+        <createTable tableName="user" remarks="用户表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" remarks="用户名" type="varchar(30)"/>
+            <column name="password" remarks="密码" type="varchar(80)"/>
+            <column name="type" remarks="用户类型" type="varchar(10)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912301221001" author="jintao.li">
+        <createTable tableName="userlist" remarks="租客表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" remarks="租客姓名" type="varchar(30)"/>
+            <column name="id_card" remarks="租客身份证号" type="varchar(30)"/>
+            <column name="phone" remarks="租客手机号码" type="varchar(30)"/>
+            <column name="user_id" remarks="用户id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912301225001" author="jintao.li">
+        <createTable tableName="houselist" remarks="房源信息表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="house_code" remarks="房屋代号" type="varchar(30)"/>
+            <column name="address" remarks="房屋地址" type="varchar(30)"/>
+            <column name="area" remarks="房屋面积" type="double(10,2)"/>
+            <column name="price" remarks="房屋价格" type="${amount}"/>
+            <column name="status" remarks="房屋状态" type="varchar(30)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912301240001" author="jintao.li">
+        <createTable tableName="apply" remarks="看房申请表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="house_code" remarks="房屋代号" type="varchar(30)"/>
+            <column name="address" remarks="房屋地址" type="varchar(30)"/>
+            <column name="area" remarks="房屋面积" type="double(10,2)"/>
+            <column name="price" remarks="房屋价格" type="${amount}"/>
+            <column name="status" remarks="房屋状态" type="varchar(30)"/>
+            <column name="userlist_id" remarks="租客id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912311020001" author="jintao.li">
+        <createTable tableName="contract" remarks="合同表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="chuzu" remarks="房东姓名" type="varchar(30)"/>
+            <column name="chuzu_id_card" remarks="房东身份证号" type="varchar(30)"/>
+            <column name="zuke" remarks="租客姓名" type="varchar(30)"/>
+            <column name="zuke_id_card" remarks="租客身份证号" type="varchar(30)"/>
+            <column name="date_from" remarks="租房日期从" type="${date}"/>
+            <column name="date_to" remarks="租房日期至" type="${date}"/>
+            <column name="price" remarks="房屋租金" type="${amount}"/>
+            <column name="address" remarks="房屋地址" type="varchar(30)"/>
+            <column name="house_code" remarks="房屋代号" type="varchar(30)"/>
+            <column name="pay_day" remarks="租金支付日" type="int(11)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912311028001" author="jintao.li">
+        <createTable tableName="zulist" remarks="在租列表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="house_code" remarks="房屋代号" type="varchar(30)"/>
+            <column name="price" remarks="房屋价格" type="${amount}"/>
+            <column name="address" remarks="房屋地址" type="varchar(30)"/>
+            <column name="userlist_id" remarks="租客id" type="bigint"/>
+            <column name="contract_id" remarks="合同id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912311035001" author="jintao.li">
+        <createTable tableName="applyout" remarks="退租申请表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="house_code" remarks="房屋代号" type="varchar(30)"/>
+            <column name="address" remarks="房屋地址" type="varchar(30)"/>
+            <column name="status" remarks="房屋状态" type="varchar(30)"/>
+            <column name="userlist_id" remarks="租客id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912311042001" author="jintao.li">
+        <createTable tableName="checkout" remarks="已退租列表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="house_code" remarks="房屋代号" type="varchar(30)"/>
+            <column name="address" remarks="房屋地址" type="varchar(30)"/>
+            <column name="status" remarks="房屋状态" type="varchar(30)"/>
+            <column name="userlist_id" remarks="租客id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912311045001" author="jintao.li">
+        <createTable tableName="topaid" remarks="待缴租金表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="house_code" remarks="房屋代号" type="varchar(30)"/>
+            <column name="address" remarks="房屋地址" type="varchar(30)"/>
+            <column name="price" remarks="房屋价格" type="${amount}"/>
+            <column name="date" remarks="交租日期" type="${date}"/>
+            <column name="name" remarks="租客姓名" type="varchar(30)"/>
+            <column name="userlist_id" remarks="租客id" type="bigint"/>
+            <column name="status" remarks="房屋状态" type="varchar(30)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912311059001" author="jintao.li">
+        <createTable tableName="paid" remarks="已缴租金表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="house_code" remarks="房屋代号" type="varchar(30)"/>
+            <column name="address" remarks="房屋地址" type="varchar(30)"/>
+            <column name="price" remarks="房屋价格" type="${amount}"/>
+            <column name="date" remarks="租金应缴日期" type="${date}"/>
+            <column name="pay_date" remarks="租金实缴日期" type="${date}"/>
+            <column name="name" remarks="租客姓名" type="varchar(30)"/>
+            <column name="userlist_id" remarks="租客id" type="bigint"/>
+            <column name="status" remarks="房屋状态" type="varchar(30)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912311106001" author="jintao.li">
+        <createTable tableName="wrong" remarks="报障表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="house_code" remarks="房屋代号" type="varchar(30)"/>
+            <column name="address" remarks="房屋地址" type="varchar(30)"/>
+            <column name="date" remarks="报障日期" type="${date}"/>
+            <column name="detail" remarks="报障内容" type="varchar(30)"/>
+            <column name="name" remarks="租客姓名" type="varchar(30)"/>
+            <column name="userlist_id" remarks="租客id" type="bigint"/>
+            <column name="status" remarks="房屋状态" type="varchar(30)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912311111001" author="jintao.li">
+        <createTable tableName="solve" remarks="已处理报障表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="house_code" remarks="房屋代号" type="varchar(30)"/>
+            <column name="address" remarks="房屋地址" type="varchar(30)"/>
+            <column name="date" remarks="报障日期" type="${date}"/>
+            <column name="detail" remarks="报障内容" type="varchar(30)"/>
+            <column name="name" remarks="租客姓名" type="varchar(30)"/>
+            <column name="userlist_id" remarks="租客id" type="bigint"/>
+            <column name="status" remarks="房屋状态" type="varchar(30)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="201912311114001" author="jintao.li">
+        <createTable tableName="schedule" remarks="日程表">
+            <column name="id" type="bigint">
+                <constraints primaryKeyName="id" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="date" remarks="日期" type="${date}"/>
+            <column name="content" remarks="日程" type="varchar(30)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

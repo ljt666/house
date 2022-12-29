@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljt.house.persistence.PaidMapper">
+
+    <resultMap id="BaseResultMap" type="com.ljt.house.domain.Paid">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="house_code" property="houseCode" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="date" property="date" jdbcType="DATE"/>
+        <result column="pay_date" property="payDate" jdbcType="DATE"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="userlist_id" property="userlistId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.ljt.house.domain.QueryVo">
+        select *
+        from paid
+        <where>
+            <if test="zuname!=null and zuname!=''">
+                and name like '%${zuname}%'
+            </if>
+            <if test="dateFrom!=null and dateFrom!=''">
+                and date &gt;= #{dateFrom}
+            </if>
+            <if test="dateTo!=null and dateTo!=''">
+                and date &lt;= #{dateTo}
+            </if>
+            <if test="userlistId!=null and userlistId!=''">
+                and userlist_id=#{userlistId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSum" resultType="decimal" parameterType="com.ljt.house.domain.QueryVo">
+        select SUM(price)
+        from paid
+        <where>
+            <if test="zuname!=null and zuname!=''">
+                and name like '%${zuname}%'
+            </if>
+            <if test="dateFrom!=null and dateFrom!=''">
+                and date &gt;= #{dateFrom}
+            </if>
+            <if test="dateTo!=null and dateTo!=''">
+                and date &lt;= #{dateTo}
+            </if>
+            <if test="userlistId!=null and userlistId!=''">
+                and userlist_id=#{userlistId}
+            </if>
+        </where>
+    </select>
+</mapper>

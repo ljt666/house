@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/main.css" th:href="@{/css/main.css}"/>
+    <script type="text/javascript" src="../../../static/js/libs/modernizr.min.js"
+            th:src="@{/js/libs/modernizr.min.js}"></script>
+
+    <script>
+        /*设置实时时间*/
+        function mytime() {
+            var a = new Date();
+            var b = a.toLocaleTimeString();//时分秒 下午9:47:28
+            var c = a.toLocaleDateString();//年月日 2020/4/30
+            document.getElementById("time1").innerHTML = c + "&nbsp" + b;//获取id为time1的对象的内嵌内容;
+        }
+
+        setInterval(function () {
+            mytime()
+        }, 1000);//setInterval方法会不停地调用函数,直到 clearInterval() 被调用或窗口被关闭。
+    </script>
+</head>
+<body>
+
+<div class="result-title">
+    <h1>首页</h1>
+</div>
+
+<div class="result-content">
+    <div class="sidebar-title">
+        <p id="time1"></p>
+        <h1>欢迎来到房屋租赁管理系统！</h1>
+        <div class="my-swiper">
+            <ul class="swiper-list">
+                <li class="swiper-slide swiper-slide2">
+                    <a href="javascript:;">
+                        <img src="../../../static/images/a.jpg" th:src="@{/images/a.jpg}">
+                    </a>
+                </li>
+                <li class="swiper-slide swiper-slide1">
+                    <a href="javascript:;">
+                        <img src="../../../static/images/b.jpg" th:src="@{/images/b.jpg}">
+                    </a>
+                </li>
+                <li class="swiper-slide swiper-slide4">
+                    <a href="javascript:;">
+                        <img src="../../../static/images/c.jpg" th:src="@{/images/c.jpg}">
+                    </a>
+                </li>
+                <li class="swiper-slide swiper-slide3">
+                    <a href="javascript:;">
+                        <img src="../../../static/images/d.jpg" th:src="@{/images/d.jpg}">
+                    </a>
+                </li>
+                <li class="swiper-slide swiper-slide5">
+                    <a href="javascript:;">
+                        <img src="../../../static/images/e.jpg" th:src="@{/images/e.jpg}">
+                    </a>
+                </li>
+            </ul>
+            <div class="changePicture">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="active"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

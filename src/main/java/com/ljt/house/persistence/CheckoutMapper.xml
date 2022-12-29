@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljt.house.persistence.CheckoutMapper">
+    <select id="getAllCheckout" resultType="com.ljt.house.dto.CheckoutDto">
+		SELECT
+		  c.id id,
+	      c.house_code houseCode,
+	      c.address address,
+	      c.status status,
+	      u.name name,
+	      u.phone phone,
+	      u.id_card idCard
+        FROM
+	     checkout c
+        LEFT JOIN userlist u ON u.id = c.userlist_id
+	</select>
+</mapper>

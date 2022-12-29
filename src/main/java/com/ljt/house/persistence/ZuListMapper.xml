@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljt.house.persistence.ZuListMapper">
+
+    <select id="findZuListByUid" resultType="com.ljt.house.dto.ZulistDto">
+		SELECT
+		    z.id,
+			z.house_code houseCode,
+			z.address address,
+			z.price price,
+			u.name name,
+			u.id_card idCard,
+			u.phone phone
+		FROM
+			zulist z
+		INNER JOIN userlist u ON u.id = z.userlist_id and u.id=#{userlistId}
+	</select>
+
+    <select id="findZukeZuList" resultType="com.ljt.house.dto.ZulistDto">
+		SELECT
+			z.house_code houseCode,
+			z.address address,
+		    z.userlist_id userlistId,
+		    z.price price,
+			u.name name
+		FROM
+			zulist z
+		JOIN userlist u ON u.id = z.userlist_id and z.id=#{id}
+	</select>
+
+    <select id="findZuUserList" resultType="com.ljt.house.dto.ZulistDto">
+		SELECT
+		    z.id id,
+			z.house_code houseCode,
+			z.address,
+			z.price,
+			u.name,
+			u.id_card idCard,
+			u.phone
+		FROM
+			zulist z
+		INNER JOIN userlist u ON u.id = z.userlist_id
+	</select>
+</mapper>

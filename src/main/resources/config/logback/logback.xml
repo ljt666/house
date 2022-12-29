@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration  scan="true" scanPeriod="60 seconds" debug="false">
+    <contextName>logback</contextName>
+    <!--输出到控制台-->
+    <!--ConsoleAppender把事件添加到控制台，更准确地说是System.out或 System.err，默认为前者。
+      ConsoleAppender按照用户指定的encoder对事件进行格式化。-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--输出到日志文件-->
+    <!--RollingFileAppender继承 FileAppender，能够滚动记录文件。例如，RollingFileAppender能先记录到文件“log.txt”，
+    然后当符合某个条件时，变成记录到其他文件。-->
+    <!--按天生成日志-->
+    <appender name="logFile"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--如果使用prudent模式，FileAppender将安全的写入到指定文件-->
+        <Prudent>true</Prudent>
+        <!--第一个是 RollingPolicy，负责滚动。-->
+        <!--TimeBasedRollingPolicy 或许是最受流行的滚动策略。它根据时间来制定滚动策略，例如根据日或月 。
+        TimeBasedRollingPolicy既负责滚动也负责触发滚动。实际上，TimeBasedRollingPolicy同时实现了RollingPolicy接口
+        和TriggeringPolicy接口。-->
+        <!--TimeBasedRollingPolicy有两个属性：必需的“fileNamePattern”和可选的“maxHistory”。-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>
+                logs/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}.log
+            </FileNamePattern>
+        </rollingPolicy>
+        <!--Layout组件来将LoggingEvent进行格式化，返回一个String，然后通过OutputStream.write()方法，把格式化之后的日志信息写到目的地-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} -%msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <!--level:用来设置打印级别-->
+    <!--<root>可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个logger。-->
+    <root level="debug,ERROR">
+        <appender-ref ref="console" />
+        <appender-ref ref="logFile" />
+    </root>
+</configuration>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljt.house.persistence.HouseListMapper">
+    <select id="selectHouselist" parameterType="com.ljt.house.domain.QueryVo" resultType="com.ljt.house.domain.HouseList">
+        select id,house_code houseCode,address,area,price,status,apartment_layout apartmentLayout,picture
+        from houselist
+        <where>
+            <if test="houseCode!=null and houseCode!=''">
+                and house_code=#{houseCode}
+            </if>
+            <if test="address!=null and address!=''">
+                and address like '%${address}%'
+            </if>
+            <if test="priceFrom!=null and priceFrom!=''">
+                and price &gt;= #{priceFrom}
+            </if>
+            <if test="priceTo!=null and priceTo!=''">
+                and price &lt;= #{priceTo}
+            </if>
+        </where>
+    </select>
+
+    <select id="findHouseListByVoCount" parameterType="com.ljt.house.domain.QueryVo" resultType="int">
+        select count(*)
+        from houselist
+        <where>
+            <if test="houseCode!=null and houseCode!=''">
+                and house_code=#{houseCode}
+            </if>
+            <if test="address!=null and address!=''">
+                and address=#{address}
+            </if>
+            <if test="area!=null and area!=''">
+                and area=#{area}
+            </if>
+            <if test="price!=null and price!=''">
+                and price=#{price}
+            </if>
+            <if test="status!=null and status!=''">
+                and status=#{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByHouseCodeUpdate" parameterType="com.ljt.house.domain.HouseList"
+            resultType="com.ljt.house.domain.HouseList">
+			select * from houselist where house_code=#{houseCode} and id=#{id}
+	</select>
+</mapper>

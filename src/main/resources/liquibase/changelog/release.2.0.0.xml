@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd" xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <changeSet id="202004221610001" author="jintao.li">
+        <addColumn tableName="houselist">
+            <column name="apartment_layout" type="varchar(30)" remarks="房子户型"></column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="202004281641001" author="jintao.li">
+        <addColumn tableName="houselist">
+            <column name="picture" type="longblob" remarks="房子图片"></column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

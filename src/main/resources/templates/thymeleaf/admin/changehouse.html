@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>房屋租赁系统</title>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/main.css"th:href="@{/css/main.css}"/>
+    <script type="text/javascript" src="../../../static/js/libs/modernizr.min.js" th:src="@{/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="../../../static/js/jquery-2.1.1.min.js" th:src="@{/js/jquery-2.1.1.min.js}"></script>
+    <script type="text/javascript" src="../../../static/js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
+
+    <style>
+        .error {
+            font-size:17px;
+            color: red;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $().ready(function () {
+            // 在键盘按下并释放及提交后验证提交表单
+            $("#myform").validate({
+                rules: {
+                    houseCode: {
+                        required: true,
+                    },
+
+                    address: {
+                        required: true,
+                    },
+
+                    area: {
+                        required: true,
+                        min: 0
+                    },
+
+                    price: {
+                        required: true,
+                        min: 0
+                    }
+                },
+
+                messages: {
+                    houseCode: {
+                        required: "房屋代号不能为空！",
+                    },
+
+                    address: {
+                        required: "地址不能为空！",
+                    },
+
+                    area: {
+                        required: "面积不能为空！",
+                        min: "请输入正确的面积"
+                    },
+
+                    price: {
+                        required: "租金不能为空！",
+                        min: "请输入正确的租金"
+                    }
+                }
+
+            });
+        })
+    </script>
+</head>
+<body>
+
+<div class="result-title">
+    <h1>更新房源</h1>
+</div>
+<div class="result-content">
+    <div class="sidebar-title">
+        <form action="/houselist/findHouseCodeUpdate" method="post" id="myform" name="myform"
+              enctype="multipart/form-data">
+            <table class="insert-tab" width="100%">
+                <input type="hidden" name="id" th:value="${houselist.id}"/>
+                <tbody>
+                <th><i class="require-red">*</i>房屋代号：</th>
+                <td>
+                    <input class="common-text required" th:value="${houselist.houseCode}" id="houseCode" name="houseCode"
+                           size="50" type="text">
+                </td>
+                </tr>
+                <tr>
+                    <th><i class="require-red">*</i>地址：</th>
+                    <td><input class="common-text" name="address" th:value="${houselist.address}" id="address" size="50"
+                               type="text"></td>
+                </tr>
+                <tr>
+                    <th><i class="require-red">*</i>面积：</th>
+                    <td><input class="common-text" name="area" th:value="${houselist.area}" id="area" size="50"
+                               type="text"></td>
+                </tr>
+                <tr>
+                    <th><i class="require-red">*</i>租金：</th>
+                    <td><input class="common-text" name="price" th:value="${houselist.price}" id="price" size="50"
+                               type="text"></td>
+                </tr>
+                <tr>
+                    <th><i class="require-red">*</i>户型：</th>
+                    <td>
+                        <select name="apartmentLayout" id="apartmentLayout" class="required">
+                            <option value="一室一厅" th:selected="${houselist.apartmentLayout == '一室一厅'}">一室一厅</option>
+                            <option value="两室一厅" th:selected="${houselist.apartmentLayout == '两室一厅'}">两室一厅</option>
+                            <option value="两室两厅" th:selected="${houselist.apartmentLayout == '两室两厅'}">两室两厅</option>
+                            <option value="三室一厅" th:selected="${houselist.apartmentLayout == '三室一厅'}">三室一厅</option>
+                            <option value="三室两厅" th:selected="${houselist.apartmentLayout == '三室两厅'}">三室两厅</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="require-red">*</i>状态：</th>
+                    <td>
+                        <select name="status" id="status" class="required">
+                            <option value="已租赁" th:selected="${houselist.status == '已租赁'}">已租赁</option>
+                            <option value="未租赁" th:selected="${houselist.status == '未租赁'}">未租赁</option>
+                            <option value="已被申请" th:selected="${houselist.status == '已被申请'}">已被申请</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                        <a href="javascript:location='/houselist/toHouselist'">
+                            <input class="btn btn6" value="返回" type="button">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <font id="error" color="red" th:text="${error}"></font>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

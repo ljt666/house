@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljt.house.persistence.ToPaidMapper">
+    <select id="findToPaid" parameterType="com.ljt.house.domain.QueryVo" resultType="com.ljt.house.domain.ToPaid">
+        select id,house_code houseCode,address,price,date,name,status
+        from topaid
+        <where>
+            <if test="userlistId!=null and userlistId!=''">
+                and userlist_id=#{userlistId}
+            </if>
+        </where>
+    </select>
+</mapper>

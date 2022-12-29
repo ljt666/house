@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>房屋租赁系统</title>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/common.css" th:href="@{/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/main.css" th:href="@{/css/main.css}"/>
+    <script type="text/javascript" src="../../../static/js/libs/modernizr.min.js" th:src="@{/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="../../../static/js/jquery-2.1.1.min.js" th:src="@{/js/jquery-2.1.1.min.js}"></script>
+    <script type="text/javascript" src="../../../static/js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
+
+    <style>
+        .error {
+            font-size:17px;
+            color: red;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $().ready(function () {
+            // 在键盘按下并释放及提交后验证提交表单
+            $("#myform").validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    idCard: {
+                        required: true,
+                        rangelength:[18,18]
+                    },
+                    phone: {
+                        required: true,
+                        number: true,
+                        rangelength:[11,11]
+                    }
+                },
+                messages: {
+                    name: {
+                        required: "姓名不能为空！",
+                    },
+                    idCard: {
+                        required: "身份证号码不能为空！",
+                        rangelength: $.validator.format("请输入长度为18位的身份证号")
+                    },
+                    phone: {
+                        required: "手机号码不能为空！",
+                        number: "请输入正确的手机号码",
+                        rangelength: $.validator.format("请输入长度为11位的号码")
+                    }
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+<div class="result-title">
+    <h1>完善个人资料</h1>
+</div>
+<div class="result-content">
+    <div class="sidebar-title">
+        <form action="/userlist/checkUserList" method="post" id="myform" name="myform" enctype="multipart/form-data">
+            <table class="insert-tab" width="100%">
+                <tbody>
+                <input type="hidden" name="id" th:value="${userlist.id}"/>
+                <tr>
+                    <th><i class="require-red">*</i>姓名：</th>
+                    <td>
+                        <!--th:value="${userlist.name}动态数据展示-->
+                        <input class="common-text required" th:value="${userlist.name}" id="name" name="name" size="50"
+                               type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="require-red">*</i>身份证号码：</th>
+                    <td><input class="common-text" name="idCard" th:value="${userlist.idCard}" id="idCard" size="50"
+                               type="text"></td>
+                </tr>
+                <tr>
+                    <th><i class="require-red">*</i>手机号码：</th>
+                    <td><input class="common-text" name="phone" th:value="${userlist.phone}" id="phone" size="50"
+                               type="text"></td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td>
+                        <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                        <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                    </td>
+                </tr>
+                <tr>
+                    <font id="error" color="red" th:text="${error}"></font>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
