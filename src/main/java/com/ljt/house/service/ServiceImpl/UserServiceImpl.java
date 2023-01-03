@@ -29,7 +29,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 //        return user1;
        //这种写法更简便，不用写xml文件
         Wrapper<User> wrapper = new EntityWrapper<>();
-        wrapper.eq(username != null, "username", username).eq(password != null, "password", password).eq(type != null, "type", type);
+         wrapper.eq(username != null, "username", username)
+                .eq(password != null, "password", password)
+                .eq(type != null, "type", type);
 
         return this.selectOne(wrapper);
 
