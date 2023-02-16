@@ -88,7 +88,7 @@ public class UserController {
                     }
                 }
             }
-            //没查到还是停留在当前页面
+            //没查到还是停留在当前页面   redirect:/user/login  也可以直接返回页面
             return "login";
         }
     }

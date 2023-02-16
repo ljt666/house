@@ -2,7 +2,10 @@ package com.ljt.house.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ljt.house.domain.*;
+import com.ljt.house.domain.Apply;
+import com.ljt.house.domain.HouseList;
+import com.ljt.house.domain.User;
+import com.ljt.house.domain.UserList;
 import com.ljt.house.dto.ApplyDto;
 import com.ljt.house.dto.UserListDto;
 import com.ljt.house.service.ServiceInterface.ApplyService;

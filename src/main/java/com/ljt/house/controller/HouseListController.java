@@ -42,7 +42,7 @@ public class HouseListController{
     @ResponseBody
     public List<HouseList> transform(QueryVo vo){
         List<HouseList> houselist = houselistService.selectHouselist(vo);
-        houselist.forEach(house->{
+        houselist.stream().forEach(house->{
             try {
                 byte[] picture = house.getPicture();
                 if(picture!=null&&picture.length>0) {

@@ -2,6 +2,7 @@ package com.ljt.house;
 
 import com.ljt.house.dto.ApplyDto;
 import com.ljt.house.persistence.ApplyMapper;
+import com.ljt.house.persistence.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class Usertest {
 
     @Autowired
     private ApplyMapper applyMapper;
+    @Autowired
+    private UserMapper userMapper;;
 
     //可以测试
     @Test
@@ -24,4 +27,5 @@ public class Usertest {
         System.out.println(apply + "----------------------------------1");
         System.out.println("22222222222222222222");
     }
+
 }

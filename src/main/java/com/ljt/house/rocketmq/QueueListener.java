@@ -1,7 +1,6 @@
 package com.ljt.house.rocketmq;
 
 import com.ljt.house.domain.User;
-import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 //${rocketmq.producer.group}  是从nacos配置中心拿值
-@RocketMQMessageListener(consumerGroup = "${rocketmq.producer.group}", topic = "user_add")
+//@RocketMQMessageListener(consumerGroup = "${rocketmq.producer.group}", topic = "user_add")
 public class QueueListener implements RocketMQListener<User> {
 
     @Override

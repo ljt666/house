@@ -14,7 +14,7 @@ public enum UtilEnum {
     ApplyOutStatus1(4, "已同意"),
     ApplyOutStatus2(5, "已拒绝"),
     ApplyOutStatus3(6, "申请中"),
-    UserType1(7, "admin"),
+    //UserType1(7, "admin"),
     UserType2(8, "zuke");
 
     private Integer id;

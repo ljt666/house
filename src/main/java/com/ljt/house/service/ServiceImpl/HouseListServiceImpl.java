@@ -48,7 +48,7 @@ public class HouseListServiceImpl extends ServiceImpl<HouseListMapper, HouseList
 
     @Override
     public HouseList findByHouseCode(String houseCode) {
-        HouseList houselist = selectOne(getInitWrapper().eq("house_code", houseCode));
+        HouseList houselist = this.selectOne(getInitWrapper().eq("house_code", houseCode));
         return houselist;
     }
 
