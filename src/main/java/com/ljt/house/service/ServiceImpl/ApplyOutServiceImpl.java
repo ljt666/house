@@ -40,7 +40,6 @@ public class ApplyOutServiceImpl extends ServiceImpl<ApplyOutMapper, ApplyOut> i
     private ZuListMapper zulistMapper;
     @Autowired
     private HouseListService houseListService;
-
     /**
      * @param zulist
      */
