@@ -80,7 +80,7 @@ public class ApplyServiceImpl extends ServiceImpl<ApplyMapper, Apply> implements
         if (houseCode == null) {
             throw new ServiceException(RespCode.HOUSECODE_IS_NOT_NULL);
         }
-        applyMapper.delete(getInitWrapper().eq("house_code", houseCode));
+        baseMapper.delete(getInitWrapper().eq("house_code", houseCode));
     }
 
     @Override

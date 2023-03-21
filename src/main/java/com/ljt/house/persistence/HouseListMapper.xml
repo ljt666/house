@@ -12,10 +12,10 @@
                 and address like '%${address}%'
             </if>
             <if test="priceFrom!=null and priceFrom!=''">
-                and price &gt;= #{priceFrom}
+                and price &gt;= #{priceFrom}    /*大于等于*/
             </if>
             <if test="priceTo!=null and priceTo!=''">
-                and price &lt;= #{priceTo}
+                and price &lt;= #{priceTo}      /*小于等于*/
             </if>
         </where>
     </select>
