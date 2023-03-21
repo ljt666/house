@@ -7,7 +7,7 @@ import com.ljt.house.domain.HouseList;
 import com.ljt.house.domain.User;
 import com.ljt.house.domain.UserList;
 import com.ljt.house.dto.ApplyDto;
-import com.ljt.house.dto.UserListDto; 
+import com.ljt.house.dto.UserListDto;
 import com.ljt.house.service.ServiceInterface.ApplyService;
 import com.ljt.house.service.ServiceInterface.HouseListService;
 import com.ljt.house.service.ServiceInterface.UserListService;
@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * @description: 看房申请controller
- * @version: 1.0
+ * @version: 120
  * @author: jingtao.li@hand-china.com
  * @date: 2020/1/23 09:44
  */
