@@ -26,6 +26,11 @@ public class ScheduleServiceImpl extends ServiceImpl<ScheduleMapper, Schedule> i
     @Autowired
     private ScheduleMapper scheduleMapper;
 
+
+
+
+    
+
     @Override
     @Transactional(rollbackFor = ServiceException.class)
     //声明式事务管理
